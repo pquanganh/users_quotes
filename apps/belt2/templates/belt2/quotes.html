@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login & Reg | Success</title>
+</head>
+<body>
+	<h1>Success! Welcome, {{user.alias}}!</h1>
+	<br>
+	<h2>Quotable Quotes</h2>
+	<table>
+		{% for quote in quotes %}
+		<tr>
+		<td>{{quote.author}}:</td>
+		<td>{{quote.message}}</td>
+		<td>Posted By: <a href="/{{quote.uploader.id}}/user">{{quote.uploader.alias}}</a></td>
+		<td><a href="/{{quote.id}}/add_fav">Add to My Fav</a></td>
+		</tr>
+		{% endfor %}
+	</table> 
+	<br>
+	<h2>Your Favorites</h2>
+	<table>
+		{% for quote in my_quotes %}
+		<tr>
+		<td>{{quote.author}}:</td>
+		<td>{{quote.message}}</td>
+		<td>Posted By: <a href="/{{quote.uploader.id}}/user">{{quote.uploader.alias}}</a></td>
+		<td><a href="/{{quote.id}}/rm_fav">Remove from My Fav</a></td>
+		</tr>
+		{% endfor %}
+	</table> 
+	<br>
+	<h2>Contribute a Quote:</h2>
+	<form action='add_quote' method='post'>
+	{% csrf_token %}
+	<table>
+		<tr>
+		<td><label for='author'>Quoted By:</label></td>
+		<td><input type="text" name="author"></td>
+		</tr>
+		<tr>
+		<td><label for='message'>Message:</label></td>
+		<td><textarea name="message"></textarea></td>
+		</tr>
+		<tr>
+		<td><input type="submit" name="submit" value='Add'></td>
+		</tr>
+	</table>
+    </form>
+
+{% if messages %}
+<div id='messages'>
+<ul>
+    {% for message in messages %}
+    <li>!!!{% if message.tags %} {{ message.tags }} {% endif %}!!! {{ message }}</li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}
+<br>
+<a href="/logout">LogOut</a>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login & Reg | Success</title>
+</head>
+<body>
+	<h2>Post by: {{user.alias}} </h2>
+	<h4>Count: {{count}}</h4>
+	{% for quote in quotes %}
+	<p>{{quote.author}}: {{quote.message}}<p>
+	{% endfor %}
+	<a href ='/quotes'>Go Back</a>
+	<br><br>
+	<a href ='/logout'>Log Out</a>
+</body>
+</html>
